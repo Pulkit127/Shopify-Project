@@ -16,17 +16,6 @@ use Osiset\ShopifyApp\Objects\Values\ShopDomain;
 use Osiset\ShopifyApp\Util;
 class AuthController extends Controller
 {
-
-    // public function index(){
-    //     $shop = "quickstart-2244f509";
-    //     $api_key = env('SHOPIFY_API_KEY');
-    //     $scopes =  env('SHOPIFY_API_SCOPES');
-    //     $redirect_uri = env('SHOPIFY_API_REDIRECT') ;
-    //     // Build install/approval URL to redirect to
-    //     $install_url = "https://admin.myshopify.com/store/".$shop."/oauth/authorize?client_id=" . $api_key . "&scope=" . urlencode($scopes). "&redirect_uri=" . urlencode($redirect_uri);
-    //     return redirect($install_url);
-    // }
-
     /**
      * Installing/authenticating a shop.
      *

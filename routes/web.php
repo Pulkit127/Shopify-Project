@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +15,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::get('/',[App\Http\Controllers\AuthController::class,'index']);
-Route::get('/', [App\Http\Controllers\AuthController::class, 'authenticate'])->middleware('verifyshopify')->name('authenticate');
-Route::get('/authenticate/token', [App\Http\Controllers\AuthController::class, 'token'])->name('authenticate.token');
-Route::post('/webhooks/orders-create', [App\Http\Controllers\HomeController::class,'handleOrderWebhook']);
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/', 'authenticate');
+    Route::get('/authenticate', 'authenticate')->middleware('verifyshopify')->name('authenticate');
+});
+
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/home', 'index')->name('home');
+});
+
+Route::controller(WebhookController::class)->prefix('webhook')->group(function(){
+   Route::any('order/create','orderCreate');
+});

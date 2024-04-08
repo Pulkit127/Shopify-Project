@@ -7,12 +7,15 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
+    public function index(Request $request){
+        $shopDomain = $request->query('shop');
+        return view('welcome',compact('shopDomain'));
+    }
     public function handleOrderWebhook(REQUEST $request)
     {
         $this->validateShopifyWebhook($request);
-        $data = $request->json()->all();
-        $orderData = $data;
-
+        $orderData = $request->json()->all();
+        
         // Store order data in the database
         $order = new Order();
         $order->shopify_order_id = $orderData['id'];
@@ -38,5 +41,4 @@ class HomeController extends Controller
         // Add more fields as needed
         $order->save();
     }
-
 }
