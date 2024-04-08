@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('shopify_order_id')->nullable();
+            $table->bigInteger('shopify_order_id')->nullable();
             $table->string('admin_graphql_api_id')->nullable();
-            $table->integer('app_id')->nullable();
+            $table->bigInteger('app_id')->nullable();
             $table->boolean('buyer_accepts_marketing');
             $table->string('browser_ip')->nullable();
-            $table->string('checkout_id')->nullable();
+            $table->bigInteger('checkout_id')->nullable();
             $table->string('checkout_token')->nullable();
             $table->boolean('confirmed');
             $table->string('currency');
